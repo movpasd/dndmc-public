@@ -1,0 +1,517 @@
+/* VARIABLES */
+
+:root {
+
+    font-size: 20px;
+
+    /* COLOR VARIABLES */
+
+    --bg: white;
+    --debug-0: hsla(0, 0%, 50%, 0.2);
+    --debug-1: hsla(300, 100%, 50%, 0.2);
+    --debug-2: hsla(180, 100%, 50%, 0.2);
+    --debug-3: hsla(60, 100%, 50%, 0.2);
+
+    /* Layout */
+    --ly-seps:
+        /* separators */
+        black;
+    --ly-hover:
+        /* hover */
+        hsl(0, 0%, 95%);
+
+    /* Text */
+    --tx: hsl(0, 0%, 30%);
+    --tx-inv:
+        /* inverted */
+        white;
+    --tx-faint: hsl(0, 0%, 50%);
+    --tx-very-faint: hsl(0, 0%, 75%);
+    /* (highlights) */
+    --tx-hl-pop: hsl(0, 100%, 50%);
+    --tx-hl-dull: hsl(0, 50%, 50%);
+    --tx-hl-pastel: hsl(0, 70%, 70%);
+    --tx-hl-dark: darkred;
+    /* (contrasts) */
+    --tx-con-pop: hsl(180, 100%, 50%);
+    --tx-con-dull: hsl(180, 50%, 50%);
+    --tx-con-pastel: hsl(180, 50%, 70%);
+    --tx-con-dark: hsl(180, 50%, 30%);
+    --tx-hl-con-transition: hsl(90, 50%, 85%);
+
+    /* Fonts */
+    --font-default: "Roboto", "Helvetica", sans;
+    --font-condensed: "Roboto Condensed", "Helvetica", sans;
+    --font-mono: "Roboto Mono", "Consolas", mono;
+
+    /* Backgrounds */
+    --bg-faint: hsl(0, 0%, 95%);
+
+
+    /* LAYOUT LOGIC VARIABLES */
+
+    --ly-ends-hpad: 1rem;
+    /* header/footer hpads */
+    --ly-content-hpad: 4rem;
+    --column-max-width: 42rem;
+    --column-min-width: 400px;
+
+    /* Narrow screen breakpoint: <640px */
+
+    /* Text layout */
+    --read-linespace: 1.2;
+    --read-def-postspace: 1rem;
+
+}
+
+@media screen and (max-width: 640px) {
+    :root {
+        font-size: 16px;
+    }
+}
+
+
+
+/* BASE SITE LAYOUT */
+
+body {
+    background-color: var(--bg);
+    font-family: var(--font-default);
+    color: var(--tx);
+}
+
+a {
+    color: var(--tx-hl-pop);
+    text-decoration: underline;
+}
+
+a:visited {
+    color: var(--tx-hl-dull);
+}
+
+code {
+    font-family: var(--font-mono);
+    background-color: var(--bg-faint);
+}
+
+/* Main column */
+
+.site-column {
+
+    /* Flexbox column layout */
+
+    max-width: var(--column-max-width);
+    min-width: var(--column-min-width);
+    min-height: 100vh;
+    margin: 0 auto;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+
+    /* Debug */
+    /* background-color: var(--debug-0); */
+
+}
+
+
+/* Header */
+
+.col-header-container {
+    /* Flexbox column layout */
+    width: 100%;
+}
+
+.col-header {
+    /* Layout */
+    padding: 2rem var(--ly-ends-hpad);
+
+    /* Debug */
+    /* background-color: var(--debug-1); */
+}
+
+.col-header #site-title {
+    /* Layout */
+    height: 100%;
+    text-align: center;
+}
+
+.col-header #site-title a {
+    /* Text */
+    font-size: 2.5rem;
+    font-weight: 700;
+    text-transform: lowercase;
+    color: var(--tx);
+    text-decoration: unset;
+}
+
+.col-header #site-title .site-title-suffix {
+    color: var(--tx-very-faint);
+}
+
+@media screen and (max-width: 640px) {
+
+    /* Header narrow-column media query */
+    .col-header #site-title a {
+        font-size: 1.9rem;
+    }
+}
+
+
+/* Nav bar (inside header) */
+
+#navbar {
+    /* Layout */
+    width: 100%;
+    height: 2.5rem;
+    padding-top: 1rem;
+
+    /* Style */
+    border-bottom: 1px solid var(--ly-seps);
+
+    /* Debug */
+    /* background-color: var(--debug); */
+}
+
+#navbar ul {
+    /* Layout */
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 100%;
+}
+
+#navbar a {
+    /* Layout */
+    display: block;
+    height: 100%;
+    flex: 0 1 8rem;
+
+    /* Text */
+    color: var(--tx);
+    text-decoration: none;
+    text-transform: lowercase;
+}
+
+#navbar li {
+    /* Layout */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+
+    /* Debug */
+    /* border: 1px solid var(--debug-1); */
+}
+
+#navbar li:hover {
+    /* Style */
+    background-color: var(--ly-hover);
+    cursor: pointer;
+}
+
+@media screen and (max-width: 640px) {
+
+    /* Navbar narrow-column media query */
+    #navbar {
+        height: 1.8rem;
+    }
+
+    #navbar a {
+        flex-basis: 6rem;
+    }
+
+}
+
+
+/* Site column footer */
+
+.col-footer-container {
+    /* Flexbox column layout */
+    width: 100%;
+    margin-top: auto;
+}
+
+.col-footer {
+
+    /* Layout */
+    padding: 3rem var(--ly-ends-hpad) 1.5rem var(--ly-ends-hpad);
+
+    /* Text */
+    font-style: italic;
+    font-size: 0.8rem;
+
+    /* Debug */
+    /* background-color: var(--debug-2); */
+
+}
+
+.col-footer ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.col-footer li {
+    display: inline-block;
+    padding: 0 0.5rem;
+}
+
+
+/* Default content styling */
+
+.col-content-container {
+    /* Flexbox column layout */
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.col-content {
+
+    /* Layout */
+    width:
+    min(
+        calc(var(--column-max-width) - 2 * var(--ly-content-hpad)),
+        90%
+    );
+
+    /* Text */
+
+    /* Debug */
+    /* background-color: var(--debug-3); */
+
+}
+
+.col-content em {
+    font-style: italic;
+}
+
+.col-content strong {
+    font-weight: bold;
+}
+
+.col-content h1 {
+    /* Text */
+    font-size: 2.2rem;
+    font-weight: bold;
+    font-family: "Roboto Slab", serif;
+}
+
+.col-content h2 {
+    /* Text */
+    font-size: 1.6rem;
+    text-decoration: underline;
+    font-family: "Roboto Slab", serif;
+    font-weight: bold;
+}
+
+.col-content h3 {
+    /* Text */
+    font-size: 1.3rem;
+    font-weight: bold;
+    font-family: "Roboto Slab", serif;
+}
+
+.col-content h4 {
+    /* Text */
+    font-weight: bold;
+    font-family: "Roboto Slab", serif;
+}
+
+.col-content h5 {
+    /* Text */
+    text-decoration: underline;
+}
+
+@media screen and (max-width: 640px) {
+
+    /* Content narrow-column media query */
+    #content {
+        width: 90%;
+    }
+}
+
+/* Post content styling */
+
+.col-content h1.post-title {
+    margin-bottom: var(--read-def-postspace);
+}
+
+.col-content .post-content h2 {
+    margin-top: calc(var(--read-def-postspace) * 3);
+    margin-bottom: calc(var(--read-def-postspace) * 2);
+}
+
+.col-content .post-content h3 {
+    margin-top: calc(var(--read-def-postspace) * 2.5);
+    margin-bottom: calc(var(--read-def-postspace) * 1.5);
+}
+
+.col-content .post-content h4, .col-content .post-content h5  {
+    margin-top: calc(var(--read-def-postspace) * 1.5);
+    margin-bottom: calc(var(--read-def-postspace) * 1);
+}
+
+.col-content .post-content p, .col-content .post-content ul, .col-content .post-content ol {
+    /* Layout */
+    width: 100%;
+    line-height: var(--read-linespace);
+    margin-bottom: var(--read-def-postspace);
+}
+
+.col-content .post-content ul {
+    list-style: square outside;
+    padding-left: 2rem;
+}
+
+.col-content .post-content ol {
+    list-style: decimal outside;
+    padding-left: 2rem;
+}
+
+.col-content .post-content li {
+    padding-left: 0.5rem;
+    padding-bottom: calc(var(--read-def-postspace) / 2);
+}
+
+/* Post page */
+
+.post-info {
+    /* Layout */
+    font-size: smaller;
+    margin-bottom: 2rem;
+    color: var(--tx-faint);
+    text-align: left;
+}
+
+.post-info-table th {
+    padding-right: 1rem;
+}
+
+.post-info-tags-container {
+    display: flex;
+    gap: 0.8em;
+}
+
+.post-content img {
+    display: block;
+    max-width: 70%;
+    margin: 0.5rem auto;
+}
+
+.post-content img + em {
+    display: block;
+    text-align: center;
+    font-size: smaller;
+}
+
+.post-content .wide-image {
+    display: block;
+    max-width: 100%;
+}
+
+
+/* Index page */
+
+/* .index-container .subtitle {
+    text-align: center;
+    font-style: italic;
+    color: var(--tx-faint);
+} */
+
+.index-container h2 {
+    font-size: 1.4rem;
+    text-decoration: none;
+    margin-bottom: 1rem;
+}
+
+.index-container .index-intro {
+    text-align: center;
+    padding: 1.3rem 0;
+    margin-bottom: 4rem;
+    
+    /* Debug */
+    /* background-color: var(--debug-1); */
+}
+
+.index-container .index-hello {
+    font-size: 1.6rem;
+    font-weight: normal;
+    margin-bottom: 2rem;
+}
+
+/* Posts list (used in multiple places) */
+
+.linklist {
+    list-style: none;
+    padding-left: 0;
+}
+
+.linklist li {
+    padding-left: 0;
+    margin-bottom: 0.5rem;
+}
+
+.linklist.postlist li article {
+    display: flex;
+}
+
+.linklist.postlist .postlist-post-prefix {
+    width: 4.5rem;
+    flex-shrink: 0;
+}
+
+.linklist.postlist time {
+    font-size: smaller;
+    color: var(--tx-faint);
+}
+
+.linklist.postlist .postlist-post-info {
+    padding-left: 1rem;
+    text-indent: -1rem;
+}
+
+.linklist.postlist .postlist-post-summary {
+    color: var(--tx-faint);
+}
+
+
+/* Page styling */
+
+.page-container h1, .specialpage-container h1 {
+    margin-bottom: 1rem;
+    font-size: 1.8rem;
+}
+
+/* Tags and tag special pages */
+
+.tag-name {
+    font-family: var(--font-mono);
+    font-weight: normal;
+}
+
+.linklist .tag-name {
+    font-size: 0.9rem;
+}
+
+h1 .tag-name {
+    font-size: inherit;
+}
+
+
+/* Stuff I can use from Markdown */
+
+.post-container .mono, .page-container .mono {
+    font-family: var(--font-mono);
+}
+
+.movpasd {
+    background-image: linear-gradient(0.25turn, rgb(230, 59, 59), rgb(236, 156, 236), rgb(71, 207, 207));
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    font-weight: bold;
+}

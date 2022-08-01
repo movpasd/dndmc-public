@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Do Not Disturb My Circles - misc</title><link href="https://donotdisturbmycircles.com/" rel="alternate"></link><link href="https://donotdisturbmycircles.com/feeds/misc.atom.xml" rel="self"></link><id>https://donotdisturbmycircles.com/</id><updated>2022-08-01T00:00:00+01:00</updated><entry><title>Inertial forces are intrinsically Galilean</title><link href="https://donotdisturbmycircles.com/inertial-forces-invariant.html" rel="alternate"></link><published>2022-08-01T00:00:00+01:00</published><updated>2022-08-01T00:00:00+01:00</updated><author><name>Movpasd</name></author><id>tag:donotdisturbmycircles.com,2022-08-01:/inertial-forces-invariant.html</id><summary type="html"></summary><content type="html">&lt;p&gt;The defining property of inertial forces is that they don't affect Galilean invariants: distance and
+duration.&lt;/p&gt;
+&lt;p&gt;This &lt;em&gt;requires&lt;/em&gt; that they be proportional to mass, but that doesn't fully characterise them.&lt;/p&gt;
+&lt;p&gt;The invariant definition can probably be proven to be equivalent to the more intuitive but arguably
+less fundamental definition, that a time-dependent SO(3) transformation can remove them entirely.&lt;/p&gt;
+&lt;p&gt;We can imagine some Galilean spacetime coordinate systems which introduce forces that might be
+described as "hyperinertial". These would violate the integrity of rigid bodies -- there's probably
+some connection to SO(3) here as well, what with rigid bodies being determined by an element of SO
+(3) and a translation from the origin.&lt;/p&gt;
+&lt;p&gt;I think Lorentzian relativity can't have inertial forces the way Galilean relativity does.
+Invariance of the spacetime interval fixes the Poincaré group (Lorentz group if origin fixed)
+completely all on its own, whereas distance and duration &lt;em&gt;doesn't&lt;/em&gt; fix the Galilean group. You need
+to impose linearity on top. This must have something to do with the fact that Galilean symmetry
+decomposes directly between space and time, whereas Lorentzian only semidirectly.&lt;/p&gt;</content><category term="misc"></category><category term="short"></category><category term="physics"></category></entry><entry><title>Why multiple time dimensions don't work</title><link href="https://donotdisturbmycircles.com/multiple-time-dimensions.html" rel="alternate"></link><published>2022-07-30T00:00:00+01:00</published><updated>2022-07-30T00:00:00+01:00</updated><author><name>Movpasd</name></author><id>tag:donotdisturbmycircles.com,2022-07-30:/multiple-time-dimensions.html</id><summary type="html"></summary><content type="html">&lt;p&gt;In Lorentzian relativity, the (strict) past and future light cones are totally disjoint, and no
+transformation within the part of SO(1, 3) connected with the identity can mix these two sets.&lt;/p&gt;
+&lt;p&gt;This property is so important that this part of SO(1, 3) is sometimes called the "orthochronous"
+Lorentz group. It's what guarantees that the causal ordering of events in spacetime is Lorentz
+invariant, and thus "objective". (I'm tempted to bet that this also enforces some sort of existence
+and uniqueness requirement on Cauchy initial value problems in Lorentzian spacetime, further
+formalising the intuition behind causality, but don't quote me on that.)&lt;/p&gt;
+&lt;p&gt;Space does not have such a linear ordering. A rotation continuously connected to the identity in
+SO(3) can rotate the +x axis into the -x axis. Therefore, there can be no causal ordering of
+events in space. This also reflects our intuition about causality: my left can be your right, but
+if a particle's past from my perspective is its future from yours, we will disagree about the
+order of causality, which would be a problem.&lt;/p&gt;
+&lt;p&gt;The reason space doesn't have such a linear ordering is because there are more than two space
+dimensions, which means that you can &lt;em&gt;rotate&lt;/em&gt; space. You can't rotate time alone (in 1+3
+dimensions) -- you can only rotate it along with space (Lorentz boosts). The rotation group SO
+(1) is trivial.&lt;/p&gt;
+&lt;p&gt;If you had more than one time dimension, then you wouldn't really have a spacetime, you'd have a
+two conjoined spaces of potentially different dimensions, distinguished by their relative sign
+in the metric. Your "time" dimension is nondeterministic. (Again, probably something here about
+Cauchy initial value problems, but again, don't quote me on it.)&lt;/p&gt;
+&lt;p&gt;(Of course, this ordering is ambiguous as to which direction is future and which is past, and so
+doesn't imply an arrow of time. T symmetry still exists.)&lt;/p&gt;</content><category term="misc"></category><category term="short"></category><category term="physics"></category></entry></feed>
