@@ -59,8 +59,8 @@
     /* Narrow screen breakpoint: <640px */
 
     /* Text layout */
-    --read-linespace: 1.2;
-    --read-def-postspace: 1rem;
+    --read-linespace: 1.6;
+    --read-def-postspace: 1.3rem;
 
 }
 
@@ -68,6 +68,14 @@
     :root {
         font-size: 16px;
     }
+}
+
+
+
+/* KaTeX OPTIONS */
+
+.katex {
+    font-size: 1.15rem;
 }
 
 

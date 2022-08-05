@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="english">
+
+
+<head>
+  
+
+    <!-- KaTeX -->
+    <script>
+      const katexOptions = {
+        delimiters: [
+          { left: "$$", right: "$$", display: true },
+          { left: "$", right: "$", display: false },
+        ]
+      };
+    </script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css" integrity="sha384-Xi8rHCmBmhbuyyhbI88391ZKP2dmfnOl4rT9ZfRI7mLTdk1wblIUnrIq35nqwEvC" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js" integrity="sha384-X/XCfMm41VSsqRNQgDerQczD69XqmjOOOwYQvr/uuC+j4OPoNhVgjdGFwhvN02Ja" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.min.js" integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous" onload="renderMathInElement(document.body, katexOptions);"></script>
+
+
+    
+  <!-- Site-specific -->
+  <title>dndmc - Modules are homomorphisms</title>
+  <meta charset="utf-8" />
+  <meta name="generator" content="Pelican" />
+
+  <link rel="stylesheet" href="https://donotdisturbmycircles.com/theme/css/reset.css" />
+  <link rel="stylesheet" href="https://donotdisturbmycircles.com/theme/css/style.css" />
+  <link rel="icon" href="https://donotdisturbmycircles.com/theme/circle.png" />
+  <script src="https://donotdisturbmycircles.com/theme/js/scripts.js"></script>
+
+  <!-- Thanks Google Fonts! -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,400;0,700;1,400;1,700&family=Roboto+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Roboto+Slab:wght@400;700&family=Roboto:ital,wght@0,400;0,700;0,900;1,400;1,700&display=swap" rel="stylesheet">
+
+
+
+
+
+
+</head>
+
+
+<body id="index" class="home">
+
+<div class="site-column">
+
+    <div class="col-header-container">
+      <header class="col-header">
+        <div id="site-title">
+        <a href="https://donotdisturbmycircles.com/">
+          Do Not Disturb My Circles<span class="site-title-suffix">.|</span>
+        </a>
+        </div>
+        <nav id="navbar">
+        <ul>
+            <a href="/"><li>Home</li></a>
+            <a href="/tags.html"><li>Tags</li></a>
+            <a href="/all-posts.html"><li>All posts</li></a>
+            <a href="/about.html"><li>About</li></a>
+        </ul>
+      </nav>
+      </header>
+    </div>
+  
+    <div class="col-content-container">
+      <div class="col-content">
+  <h1 class="post-title">
+  <a href="https://donotdisturbmycircles.com/drafts/modules-are-homomorphisms.html" rel="bookmark"
+    title="Permalink to Modules are homomorphisms">
+    Modules are homomorphisms
+  </a>
+  </h1>
+  
+
+  <footer class="post-info">
+  <table class="post-info-table">
+      <tr>
+        <th>published</th>
+        <td>
+          <time class="published" datetime="9999-12-31T23:59:59.999999-00:01">
+          </time>
+        </td>
+      </tr>
+  </table>
+  </footer>
+
+  <div class="post-content">
+    <p>For a while now I've been frustrated by the lack of rigorous mathematical
+formalisation of software modularity. I've been circling around the idea of
+graph theory and "granularisation" of graphs trying to find a good definition,
+when I realised the solution had been under my nose the whole time:
+<strong>homomorphisms!</strong> This post sketches out the main concepts, but at some point
+I will write this all out in more detail.</p>
+<p>If a set of dependencies between software elements (say, procedures and structs
+for procedural programming, or classes and methods for OOP) is represented by a
+directed graph (with $a \rightarrow b$ meaning "b depends on a"), then a
+modularisation of of these elements is just a homomorphism $\phi$ which maps
+these to a new graph, whose vertices are the modules, and the edges
+dependencies between the higher-level modules.</p>
+<p>(By the way, the title of this post should strictly speaking be "modules
+are <em>images of</em> homomorphisms", or "<em>modularisations</em> are homomorphisms", but
+that was less catchy.)</p>
+<p>(My choice of having $\rightarrow$ mean "is required by" rather than the more
+natural-seeming "depends on" is because it's more natural for the partial order
+on a DAG to be given by $\rightarrow$ becoming $\leq$, so that the basic
+language or standard library is given by a smallest rather than largest
+element. I'm not 100% certain this is the right convention, though.)</p>
+<p>We might want to not only consider dependency, but also <em>degree</em> of dependency.
+I can think of two ways of accomplishing this. Multiple edges could represent
+repeated dependencies (if class $A$ references class $B$ twice, there are two
+edges $B \rightarrow A$), and then we could impose a condition on $\phi$ that
+the number of edges is conserved. (Then modularisation is just vertex
+contraction.) Another way is to assign weights to edges, and consider
+homomorphisms which conserve sum of weights.</p>
+<p>We might also want to keep track of the <em>size</em> of modules by assigning a
+vertex-weight to each module, which counts the number of constituent elements.</p>
+<h3>Alternate measures of coupling</h3>
+<p>So far, my discussion has been exclusively on <em>dependency</em> as the appropriate
+measure of <em>coupling</em>. Now, to be sure, "coupling" does not have a
+mathematically well-defined meaning (unlike dependency which is easily modeled
+using directed graphs). Therefore, I'm free to define it however I like so long
+as it captures the intuition about what "coupling" is supposed to mean -- </p>
+<p>I read once (I think it was on <a href="wiki.c2.com">WikiWikiWeb</a>), that coupling ought
+to be measured by <em>probability of change</em>, not dependency. This is a decent
+point. It is much more OK for two modules to be highly interdependent if
+neither is going to change much. This suggests we think about a theory of
+change for dependency graphs.</p>
+<p>All change in a codebase may be summarised by some set of deletions and
+additions. I think it's fairly uncontroversial to say that in software,
+the adding code part is always easier than the removing code part. That's how
+spaghetti code ends up getting written: adding and adding without ever removing.
+This is reflected in the one-way nature of dependency. If $a \rightarrow b$,
+then $b$ can be modified to take or not take $a$ as a dependency without
+modifying $a$, but $a$ can't be modified without requiring $b$ to change.
+<em>Breaking changes flow one way</em>, and that way is downstream. This causal
+structure is what causes dependency hell.</p>
+<p>We might also consider code which is thematically connected to be more proximal
+and thus more logically grouped together into modules, though I would
+<a href="{filename}/thematic-modules-harmful.md">advise against that</a>, personally. This
+can be modelled by adding an extra weighted edge between code elements which
+have a thematic connection. Besides thematic, there might be other types
+of <em>conceptual connections</em> between elements, like semantic coupling
+(where coupling arises due to the use of similar language), which reinforce
+their proximity even if they are not strictly speaking dependent.</p>
+<p>For example, </p>
+<h3>Self-dependency</h3>
+<h3>Module patterns</h3>
+<h3>Modules &amp; submodules</h3>
+<p>One of the reasons I like this homomorphism approach so much is that it's very
+composable. The modularised elements have the exact same structure as the
+elements underlying them (weighted directed graph), meaning that they can be
+further supermodularised. So the homomorphism model captures</p>
+<h3>Procedures as modules</h3>
+  </div>
+      </div>
+    </div>
+  
+    <div class="col-footer-container">
+      <footer class="col-footer">
+        <ul>
+          <li>
+            <address><a href="/contact">contact</a></address>
+          </li>
+          <li>
+            <a rel="license" href="/license">license</a>
+          </li>
+          <li>
+          <address>
+          powered by <a href="https://getpelican.com/">Pelican</a>
+          </address>
+          </li>
+        </ul>
+      </footer>
+    </div>
+
+</div>
+
+</body>
+
+
+</html>
