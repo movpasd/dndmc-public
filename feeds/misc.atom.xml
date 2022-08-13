@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Do Not Disturb My Circles - misc</title><link href="https://donotdisturbmycircles.com/" rel="alternate"></link><link href="https://donotdisturbmycircles.com/feeds/misc.atom.xml" rel="self"></link><id>https://donotdisturbmycircles.com/</id><updated>2022-08-13T00:00:00+01:00</updated><entry><title>Software design is a lot like mathematics</title><link href="https://donotdisturbmycircles.com/code-like-maths.html" rel="alternate"></link><published>2022-08-13T00:00:00+01:00</published><updated>2022-08-13T00:00:00+01:00</updated><author><name>Movpasd</name></author><id>tag:donotdisturbmycircles.com,2022-08-13:/code-like-maths.html</id><summary type="html"></summary><content type="html">&lt;p&gt;I don't mean that programming is &lt;em&gt;mathematical&lt;/em&gt; (which is of course is), or that
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Do Not Disturb My Circles - misc</title><link href="https://donotdisturbmycircles.com/" rel="alternate"></link><link href="https://donotdisturbmycircles.com/feeds/misc.atom.xml" rel="self"></link><id>https://donotdisturbmycircles.com/</id><updated>2022-08-13T00:00:00+01:00</updated><entry><title>Software design is a lot like mathematics</title><link href="https://donotdisturbmycircles.com/code-like-maths.html" rel="alternate"></link><published>2022-08-13T00:00:00+01:00</published><updated>2022-08-13T00:00:00+01:00</updated><author><name>Movpasd</name></author><id>tag:donotdisturbmycircles.com,2022-08-13:/code-like-maths.html</id><summary type="html"></summary><content type="html">&lt;p&gt;I don't mean that programming is &lt;em&gt;mathematical&lt;/em&gt; (which it of course is), or that
 mathematics is &lt;em&gt;mechanical&lt;/em&gt; (which it sometimes also is). I mean that the
 actual process of software design and writing code is a lot like the process of
 doing and creating mathematics.&lt;/p&gt;
@@ -16,8 +16,7 @@ sort, we usually call that a bug.&lt;/p&gt;
 &lt;p&gt;But not always. There are certain software design approaches which value the
 unexpected, usually by harnessing the emergence of functionality from the
 juxtaposition of many small modules. Like the UNIX philosophy. Or functional
-programming approaches, where power often comes from [combinatoric explosion]
-(https://stackoverflow.com/questions/6016271/) of definable functions. If you
+programming approaches, where power often comes from &lt;a href="https://stackoverflow.com/questions/6016271/"&gt;combinatoric explosion&lt;/a&gt; of definable functions. If you
 had a reductionist bent, you could argue that mathematics is just the
 exploration of the uncomputably large space of statements that may be derived
 from axioms and logical inference rules. Good definitions are those which
