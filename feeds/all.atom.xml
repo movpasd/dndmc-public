@@ -1,5 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Do Not Disturb My Circles</title><link href="https://donotdisturbmycircles.com/" rel="alternate"></link><link href="https://donotdisturbmycircles.com/feeds/all.atom.xml" rel="self"></link><id>https://donotdisturbmycircles.com/</id><updated>2022-08-13T00:00:00+01:00</updated><entry><title>Software design is a lot like mathematics</title><link href="https://donotdisturbmycircles.com/code-like-maths.html" rel="alternate"></link><published>2022-08-13T00:00:00+01:00</published><updated>2022-08-13T00:00:00+01:00</updated><author><name>Movpasd</name></author><id>tag:donotdisturbmycircles.com,2022-08-13:/code-like-maths.html</id><summary type="html"></summary><content type="html">&lt;p&gt;I don't mean that programming is &lt;em&gt;mathematical&lt;/em&gt; (which it of course is), or that
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Do Not Disturb My Circles</title><link href="https://donotdisturbmycircles.com/" rel="alternate"></link><link href="https://donotdisturbmycircles.com/feeds/all.atom.xml" rel="self"></link><id>https://donotdisturbmycircles.com/</id><updated>2022-08-16T00:00:00+01:00</updated><entry><title>Inheritance is goto for polymorphism</title><link href="https://donotdisturbmycircles.com/inheritance-goto.html" rel="alternate"></link><published>2022-08-16T00:00:00+01:00</published><updated>2022-08-16T00:00:00+01:00</updated><author><name>Movpasd</name></author><id>tag:donotdisturbmycircles.com,2022-08-16:/inheritance-goto.html</id><summary type="html"></summary><content type="html">&lt;p&gt;Everyone likes to give inheritance a hard time these days. Compose, don't
+inherit, so they say. Well, time for me to jump onto the bandwagon. Here is
+reason #6701 why inheritance is a problem.&lt;/p&gt;
+&lt;p&gt;Inheritance in traditional OOP introduces implicit single-dispatch polymorphism
+at every call site. When you call &lt;code&gt;.myMethod()&lt;/code&gt; on &lt;code&gt;SomeClass someObject&lt;/code&gt;, you
+may think you know what behaviour you're eliciting, but you actually don't.
+Because if &lt;code&gt;SomeChildClass extends SomeClass&lt;/code&gt;, and later you or someone else
+decides to &lt;code&gt;@override myMethod()&lt;/code&gt;, then the caller of &lt;code&gt;.myMethod()&lt;/code&gt; no longer
+has any control over what happens.&lt;/p&gt;
+&lt;p&gt;Contrast this with generics-based polymorphism. When I call a generic
+&lt;code&gt;myProc&amp;lt;T&amp;gt;()&lt;/code&gt;, at the call site, I have full control over where control flow
+goes. I know at compile time exactly what will be executed. This makes
+&lt;code&gt;myProc&amp;lt;T&amp;gt;()&lt;/code&gt; nice and usable from the caller's perspective.&lt;/p&gt;
+&lt;p&gt;Same thing for ad hoc polymorphism. When I call &lt;code&gt;myProc(float x)&lt;/code&gt;, I know that
+it's not &lt;code&gt;myProc(String x)&lt;/code&gt; that will get run.&lt;/p&gt;
+&lt;p&gt;(Not all inheritance has this problem, you specifically need dynamic dispatch,
+i.e.: virtual methods. So this isn't as much of a problem in C++ for example,
+since you know at the call site that unpredictable runtime polymorphism might
+occur because you know can see the method is virtual.)&lt;/p&gt;
+&lt;p&gt;Of course, the fact that you don't know where control flow is the whole &lt;em&gt;point&lt;/em&gt;
+of OOP, right? Hide the implementation. Yes! Absolutely. Information hiding is
+awesome. Modularity all the way. But, as has been pointed out by many before
+me, the object just never seems to be the &lt;em&gt;right scale&lt;/em&gt; at which to create an
+interface-implementation split. Modules are.&lt;/p&gt;
+&lt;p&gt;This ends up incentivising code which is really hard to understand, where you
+have to jump around between classes a lot. Because let's be honest: most
+methods or procedures just don't have the kind of in-depth documentation of
+exactly what it's supposed to do and which post-conditions need to be
+maintained, information which is critical for a person &lt;code&gt;extend&lt;/code&gt;ing your class
+in the future. So &lt;code&gt;TheirChildClass&lt;/code&gt; ends up violating that implicit
+post-condition which callees of the method are quietly depending on.&lt;/p&gt;
+&lt;p&gt;This reminds me of nothing less than the dreaded &lt;code&gt;goto&lt;/code&gt;. &lt;code&gt;goto&lt;/code&gt; is bad because
+it creates an unstable relationship between the &lt;code&gt;goto&lt;/code&gt;er and the &lt;code&gt;goto&lt;/code&gt;ee. The
+&lt;code&gt;goto&lt;/code&gt;er gets no guarantees about if, when, nor how execution will return to
+it. This is &lt;em&gt;implicit control flow&lt;/em&gt;, because the &lt;code&gt;goto&lt;/code&gt; could send you anywhere
+compared to the current statement, before or after, creating the potential for
+complicated unexpected dependencies.&lt;/p&gt;
+&lt;p&gt;With inheritance, you have &lt;em&gt;implicit polymorphism&lt;/em&gt;. Sure, you're still doing
+structured programming, so at least you know the method will return. So there's
+no uncertainty in the caller control flow. But there is unpredictability in
+the &lt;em&gt;behaviour&lt;/em&gt; of the method call, which leaks upwards to make the caller
+unpredictable as well.&lt;/p&gt;</content><category term="misc"></category><category term="code"></category></entry><entry><title>Software design is a lot like mathematics</title><link href="https://donotdisturbmycircles.com/code-like-maths.html" rel="alternate"></link><published>2022-08-13T00:00:00+01:00</published><updated>2022-08-13T00:00:00+01:00</updated><author><name>Movpasd</name></author><id>tag:donotdisturbmycircles.com,2022-08-13:/code-like-maths.html</id><summary type="html"></summary><content type="html">&lt;p&gt;I don't mean that programming is &lt;em&gt;mathematical&lt;/em&gt; (which it of course is), or that
 mathematics is &lt;em&gt;mechanical&lt;/em&gt; (which it sometimes also is). I mean that the
 actual process of software design and writing code is a lot like the process of
 doing and creating mathematics.&lt;/p&gt;

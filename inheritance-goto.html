@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="english">
+
+
+<head>
+  
+
+    
+  <!-- Site-specific -->
+  <title>dndmc - Inheritance is goto for polymorphism</title>
+  <meta charset="utf-8" />
+  <meta name="generator" content="Pelican" />
+
+  <link rel="stylesheet" href="https://donotdisturbmycircles.com/theme/css/reset.css" />
+  <link rel="stylesheet" href="https://donotdisturbmycircles.com/theme/css/style.css" />
+  <link rel="icon" href="https://donotdisturbmycircles.com/theme/circle.png" />
+  <script src="https://donotdisturbmycircles.com/theme/js/scripts.js"></script>
+
+  <!-- Thanks Google Fonts! -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,400;0,700;1,400;1,700&family=Roboto+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Roboto+Slab:wght@400;700&family=Roboto:ital,wght@0,400;0,700;0,900;1,400;1,700&display=swap" rel="stylesheet">
+
+
+
+
+
+    <meta name="tags" content="code" />
+
+</head>
+
+
+<body id="index" class="home">
+
+<div class="site-column">
+
+    <div class="col-header-container">
+      <header class="col-header">
+        <div id="site-title">
+        <a href="https://donotdisturbmycircles.com/">
+          Do Not Disturb My Circles<span class="site-title-suffix">.|</span>
+        </a>
+        </div>
+        <nav id="navbar">
+        <ul>
+            <a href="/"><li>Home</li></a>
+            <a href="/tags.html"><li>Tags</li></a>
+            <a href="/all-posts.html"><li>All posts</li></a>
+            <a href="/about.html"><li>About</li></a>
+        </ul>
+      </nav>
+      </header>
+    </div>
+  
+    <div class="col-content-container">
+      <div class="col-content">
+  <h1 class="post-title">
+  <a href="https://donotdisturbmycircles.com/inheritance-goto.html" rel="bookmark"
+    title="Permalink to Inheritance is goto for polymorphism">
+    Inheritance is goto for polymorphism
+  </a>
+  </h1>
+  
+
+  <footer class="post-info">
+  <table class="post-info-table">
+      <tr>
+        <th>published</th>
+        <td>
+          <time class="published" datetime="2022-08-16T00:00:00+01:00">
+          2022-08-16</time>
+        </td>
+      </tr>
+      <tr>
+          <th>tags</th>
+          <td>
+            <nav class="post-info-tags-container" aria-label="Tags">
+                <a class="tag-name" href="https://donotdisturbmycircles.com/tags/code.html">code</a>
+            </nav>
+          </td>
+      </tr>
+  </table>
+  </footer>
+
+  <div class="post-content">
+    <p>Everyone likes to give inheritance a hard time these days. Compose, don't
+inherit, so they say. Well, time for me to jump onto the bandwagon. Here is
+reason #6701 why inheritance is a problem.</p>
+<p>Inheritance in traditional OOP introduces implicit single-dispatch polymorphism
+at every call site. When you call <code>.myMethod()</code> on <code>SomeClass someObject</code>, you
+may think you know what behaviour you're eliciting, but you actually don't.
+Because if <code>SomeChildClass extends SomeClass</code>, and later you or someone else
+decides to <code>@override myMethod()</code>, then the caller of <code>.myMethod()</code> no longer
+has any control over what happens.</p>
+<p>Contrast this with generics-based polymorphism. When I call a generic
+<code>myProc&lt;T&gt;()</code>, at the call site, I have full control over where control flow
+goes. I know at compile time exactly what will be executed. This makes
+<code>myProc&lt;T&gt;()</code> nice and usable from the caller's perspective.</p>
+<p>Same thing for ad hoc polymorphism. When I call <code>myProc(float x)</code>, I know that
+it's not <code>myProc(String x)</code> that will get run.</p>
+<p>(Not all inheritance has this problem, you specifically need dynamic dispatch,
+i.e.: virtual methods. So this isn't as much of a problem in C++ for example,
+since you know at the call site that unpredictable runtime polymorphism might
+occur because you know can see the method is virtual.)</p>
+<p>Of course, the fact that you don't know where control flow is the whole <em>point</em>
+of OOP, right? Hide the implementation. Yes! Absolutely. Information hiding is
+awesome. Modularity all the way. But, as has been pointed out by many before
+me, the object just never seems to be the <em>right scale</em> at which to create an
+interface-implementation split. Modules are.</p>
+<p>This ends up incentivising code which is really hard to understand, where you
+have to jump around between classes a lot. Because let's be honest: most
+methods or procedures just don't have the kind of in-depth documentation of
+exactly what it's supposed to do and which post-conditions need to be
+maintained, information which is critical for a person <code>extend</code>ing your class
+in the future. So <code>TheirChildClass</code> ends up violating that implicit
+post-condition which callees of the method are quietly depending on.</p>
+<p>This reminds me of nothing less than the dreaded <code>goto</code>. <code>goto</code> is bad because
+it creates an unstable relationship between the <code>goto</code>er and the <code>goto</code>ee. The
+<code>goto</code>er gets no guarantees about if, when, nor how execution will return to
+it. This is <em>implicit control flow</em>, because the <code>goto</code> could send you anywhere
+compared to the current statement, before or after, creating the potential for
+complicated unexpected dependencies.</p>
+<p>With inheritance, you have <em>implicit polymorphism</em>. Sure, you're still doing
+structured programming, so at least you know the method will return. So there's
+no uncertainty in the caller control flow. But there is unpredictability in
+the <em>behaviour</em> of the method call, which leaks upwards to make the caller
+unpredictable as well.</p>
+  </div>
+      </div>
+    </div>
+  
+    <div class="col-footer-container">
+      <footer class="col-footer">
+        <ul>
+          <li>
+            <address><a href="/contact">contact</a></address>
+          </li>
+          <li>
+            <a rel="license" href="/license">license</a>
+          </li>
+          <li>
+          <address>
+          powered by <a href="https://getpelican.com/">Pelican</a>
+          </address>
+          </li>
+        </ul>
+      </footer>
+    </div>
+
+</div>
+
+</body>
+
+
+</html>
