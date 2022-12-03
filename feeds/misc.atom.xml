@@ -67,9 +67,9 @@ since, but because of the &lt;em&gt;style of play&lt;/em&gt; that was prevalent 
 (i.e.: the metagame).&lt;/p&gt;
 &lt;p&gt;This "macrostate" idea is arguably quite close to the way actual humans evaluate
 chess positions. We make &lt;em&gt;arguments&lt;/em&gt; as to why White or Black is winning in
-this or that position, and the support those arguments we point to &lt;em&gt;reasons&lt;/em&gt;.
-Such reasons (such as "Black's king is exposed" or "White has a great outpost
-on f6") are the macrostates.&lt;/p&gt;
+this or that position, and then to support those arguments we point
+to &lt;em&gt;reasons&lt;/em&gt;. Such reasons (such as "Black's king is exposed" or "White has a
+great outpost on f6") are the macrostates.&lt;/p&gt;
 &lt;p&gt;One last elaboration. Instead of considering only the ultimate evaluation of the
 game based on a property of the current position, you could approach this
 more "dynamically" by considering the probabilities of transitioning to other
