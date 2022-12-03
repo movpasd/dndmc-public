@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="english">
+
+
+<head>
+  
+
+    
+  <!-- Site-specific -->
+  <title>dndmc - "Positional chess" is a weird concept</title>
+  <meta charset="utf-8" />
+  <meta name="generator" content="Pelican" />
+
+  <link rel="stylesheet" href="https://donotdisturbmycircles.com/theme/css/reset.css" />
+  <link rel="stylesheet" href="https://donotdisturbmycircles.com/theme/css/style.css" />
+  <link rel="icon" href="https://donotdisturbmycircles.com/theme/circle.png" />
+  <script src="https://donotdisturbmycircles.com/theme/js/scripts.js"></script>
+
+  <!-- Thanks Google Fonts! -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,400;0,700;1,400;1,700&family=Roboto+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Roboto+Slab:wght@400;700&family=Roboto:ital,wght@0,400;0,700;0,900;1,400;1,700&display=swap" rel="stylesheet">
+
+
+
+
+
+    <meta name="tags" content="chess" />
+    <meta name="tags" content="games" />
+    <meta name="tags" content="maths" />
+
+</head>
+
+
+<body id="index" class="home">
+
+<div class="site-column">
+
+    <div class="col-header-container">
+      <header class="col-header">
+        <div id="site-title">
+        <a href="https://donotdisturbmycircles.com/">
+          Do Not Disturb My Circles<span class="site-title-suffix">.|</span>
+        </a>
+        </div>
+        <nav id="navbar">
+        <ul>
+            <a href="/"><li>Home</li></a>
+            <a href="/tags.html"><li>Tags</li></a>
+            <a href="/all-posts.html"><li>All posts</li></a>
+            <a href="/about.html"><li>About</li></a>
+        </ul>
+      </nav>
+      </header>
+    </div>
+  
+    <div class="col-content-container">
+      <div class="col-content">
+  <h1 class="post-title">
+  <a href="https://donotdisturbmycircles.com/chess-probability.html" rel="bookmark"
+    title="Permalink to "Positional chess" is a weird concept">
+    "Positional chess" is a weird concept
+  </a>
+  </h1>
+  
+
+  <footer class="post-info">
+  <table class="post-info-table">
+      <tr>
+        <th>published</th>
+        <td>
+          <time class="published" datetime="2022-12-03T00:00:00+00:00">
+          2022-12-03</time>
+        </td>
+      </tr>
+      <tr>
+          <th>tags</th>
+          <td>
+            <nav class="post-info-tags-container" aria-label="Tags">
+                <a class="tag-name" href="https://donotdisturbmycircles.com/tags/chess.html">chess</a>
+                <a class="tag-name" href="https://donotdisturbmycircles.com/tags/games.html">games</a>
+                <a class="tag-name" href="https://donotdisturbmycircles.com/tags/maths.html">maths</a>
+            </nav>
+          </td>
+      </tr>
+  </table>
+  </footer>
+
+  <div class="post-content">
+    <p>There are two methods of thinking when playing chess (or any abstract strategy
+game) -- <em>calculational</em> or <em>tactical</em> thinking, and <em>heuristic</em> or <em>strategic</em>
+thinking. In chess we might also call the latter <em>positional</em> thinking.</p>
+<p>This is somewhat strange. After all, chess is a combinatorial game of perfect
+information. If you lose, it is not because you rolled a dice imperfectly, nor
+because you had to guess what an opponent would play and by misfortune guessed
+poorly -- it is because you played a bad move. Therefore, it is strange
+(at least to me) that heuristics should be involved at all.</p>
+<p>Here's it put another way. When you play chess, you constantly make decisions
+based on <em>probability</em>. When you decide to put a knight on a central square,
+it's not because you know that 21 moves down the line you're going to be able
+to threaten a fork. You put that knight there because you know that from a
+central square, you're <em>more likely</em> to be able to get it involved in a tactic
+down the line.</p>
+<p>We are forced to make probabilistic decisions because the search space is far
+too large due to the combinatorial nature of the game, despite there being
+absolutely no probability whatsoever in the game itself. From the moment you
+set up the pieces on the board, the game is one single extended tactical
+combination, one long forced win or draw; and the only reason it is ever not
+that is because at some point a player makes a mistake.</p>
+<p>You might think chess engines are different, but in fact they're not! Sure,
+chess engines are able to calculate much, much deeper than humans, and that is
+the main reason why they absolutely dominate human players; however, they
+cannot calculate all the way down to checkmate from a complicated position
+(and likely will never be able to barring massive improvements in computer
+technology or the development of novel algorithms for reducing the search
+space).</p>
+<p>Instead they look a couple of dozen moves deep (at most), and then <em>evaluate the
+resulting position</em>. And that evaluation function must be supplied by
+a <em>human</em>, based on centuries of <em>human</em> chess position evaluation heuristics.
+I mean, sure, a lot of it is common sense ("more pieces = more win"). But
+because of this, chess engines often overlook fortresses and other clearly
+drawn situations, insisting they might be able to squeeze out a win due to
+superior material. In this sense, chess engines also have no choice but to
+rely on probabilistic reasoning.</p>
+<p>I'm not sure how exactly to make rigorous, mathematical sense of this paradox.
+How can a game without any probability require probabilistic reasoning? I'm
+sure some mathematician specialising in game theory will have done research on
+this. But I'll throw out an idea of how you might approach it.</p>
+<p>The idea is to borrow a page out of statistical mechanics and the notion of
+microstate vs macrostate. You would divide the space of possible chess
+positions (microstates) into parts (macrostates) according to various
+properties of the position (such as material, piece activity, number of passed
+pawns, and such). You would then argue that within each of these classes, a
+certain fraction of the positions are won for White, a certain fraction are won
+for Black, and a certain fraction are drawn. Evaluation of a position then
+comes down to identifying the properties of the position and arguing that
+because the position has this or that set of properties, it is more or
+less <em>likely</em> that White or Black is winning or that the game is drawn.</p>
+<p>The issue with this is that it just pushes the problem down one step. How do you
+figure out those fractions without just calculating every position? What our
+human brains do is they look back on all the games that we have played as well
+as all the theory we have studied, and assign approximate probabilities to
+these different macrostates. You could do the same thing: look at a database of
+all games, look at every position that arises in those games, classify them
+according to the properties you're studying, and derive win/draw percentages
+from that.</p>
+<p>The issue with <em>that</em> is that it effectively introduces a notion of "metagame".
+It's conceivable that human play may get stuck in a metastable equilibrium, and
+so that your win/draw proportions are not actually objective but depend on the
+particularities of the metagame. Consider this as an illustration: if you fed
+this model games exclusively from the 19th century, versus games exclusively
+from the 21st, the former is likely to put much less stock on material and much
+more on piece activity; this is not because the game has actually changed
+since, but because of the <em>style of play</em> that was prevalent at the time
+(i.e.: the metagame).</p>
+<p>This "macrostate" idea is arguably quite close to the way actual humans evaluate
+chess positions. We make <em>arguments</em> as to why White or Black is winning in
+this or that position, and the support those arguments we point to <em>reasons</em>.
+Such reasons (such as "Black's king is exposed" or "White has a great outpost
+on f6") are the macrostates.</p>
+<p>One last elaboration. Instead of considering only the ultimate evaluation of the
+game based on a property of the current position, you could approach this
+more "dynamically" by considering the probabilities of transitioning to other
+positions with different properties. For example, a material imbalance of
+20 to 21 is quite likely to eventually transition to one of 3 to 4, while it's
+much less likely to end up at 19 to 12.</p>
+  </div>
+      </div>
+    </div>
+  
+    <div class="col-footer-container">
+      <footer class="col-footer">
+        <ul>
+          <li>
+            <address><a href="/contact">contact</a></address>
+          </li>
+          <li>
+            <a rel="license" href="/license">license</a>
+          </li>
+          <li>
+          <address>
+          powered by <a href="https://getpelican.com/">Pelican</a>
+          </address>
+          </li>
+        </ul>
+      </footer>
+    </div>
+
+</div>
+
+</body>
+
+
+</html>

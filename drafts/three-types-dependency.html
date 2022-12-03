@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="english">
+
+
+<head>
+  
+
+    
+  <!-- Site-specific -->
+  <title>dndmc - (unnamed)</title>
+  <meta charset="utf-8" />
+  <meta name="generator" content="Pelican" />
+
+  <link rel="stylesheet" href="https://donotdisturbmycircles.com/theme/css/reset.css" />
+  <link rel="stylesheet" href="https://donotdisturbmycircles.com/theme/css/style.css" />
+  <link rel="icon" href="https://donotdisturbmycircles.com/theme/circle.png" />
+  <script src="https://donotdisturbmycircles.com/theme/js/scripts.js"></script>
+
+  <!-- Thanks Google Fonts! -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,400;0,700;1,400;1,700&family=Roboto+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Roboto+Slab:wght@400;700&family=Roboto:ital,wght@0,400;0,700;0,900;1,400;1,700&display=swap" rel="stylesheet">
+
+
+
+
+
+    <meta name="tags" content="code" />
+    <meta name="tags" content="code:codography" />
+
+</head>
+
+
+<body id="index" class="home">
+
+<div class="site-column">
+
+    <div class="col-header-container">
+      <header class="col-header">
+        <div id="site-title">
+        <a href="https://donotdisturbmycircles.com/">
+          Do Not Disturb My Circles<span class="site-title-suffix">.|</span>
+        </a>
+        </div>
+        <nav id="navbar">
+        <ul>
+            <a href="/"><li>Home</li></a>
+            <a href="/tags.html"><li>Tags</li></a>
+            <a href="/all-posts.html"><li>All posts</li></a>
+            <a href="/about.html"><li>About</li></a>
+        </ul>
+      </nav>
+      </header>
+    </div>
+  
+    <div class="col-content-container">
+      <div class="col-content">
+  <h1 class="post-title">
+  <a href="https://donotdisturbmycircles.com/drafts/three-types-dependency.html" rel="bookmark"
+    title="Permalink to (unnamed)">
+    (unnamed)
+  </a>
+  </h1>
+  
+
+  <footer class="post-info">
+  <table class="post-info-table">
+      <tr>
+        <th>published</th>
+        <td>
+          <time class="published" datetime="2022-08-16T00:00:00+01:00">
+          2022-08-16</time>
+        </td>
+      </tr>
+      <tr>
+          <th>tags</th>
+          <td>
+            <nav class="post-info-tags-container" aria-label="Tags">
+                <a class="tag-name" href="https://donotdisturbmycircles.com/tags/code.html">code</a>
+                <a class="tag-name" href="https://donotdisturbmycircles.com/tags/codecodography.html">code:codography</a>
+            </nav>
+          </td>
+      </tr>
+  </table>
+  </footer>
+
+  <div class="post-content">
+    <p>I've been thinking a lot about modules.</p>
+<h2>Dependency is directional</h2>
+<p>A common approach to thinking about modularity is the notion of "coupling".
+You may have seen the diagram below before (public domain):</p>
+<p><img alt="" src="/static/cohesion-coupling.png"></p>
+<p>I have an issue with this diagram I think coupling is <em>directional</em>. That's
+because coupling is ultimately about <em>dependency</em>.</p>
+<p>We like to think of coupling between modules as "interaction" between two
+things. But this seems wrong to me. Contemporary methods for writing code are
+hierarchical.</p>
+<p>For procedural or object-oriented programming, you enter a program at one place,
+then execution flows from place to place in a thread of execution. For
+functional programming, you have a main function which is expanded recursively
+into one big evaluation. In both cases, you start at the top, and every
+procedure call or function reference brings you down one level, and it all
+eventually returns and control is thrown back up the chain.</p>
+<p>But the point is, when <code>foo() { bar() }</code>, <code>foo</code> depends on <code>bar</code>, but <code>bar</code> does
+not depend on <code>foo</code>. The case where they depend on each other is what we call
+recursion, and it's a special case, not the norm -- even so, it's just made up
+of two function calls, each of which is a directional dependency.</p>
+<h2>Three layers of dependency</h2>
+<p>A dependency of a piece of code is something that that piece of code requires in
+order to run successfully. But that is a poor definition, as it just pushes the
+word "depend" into "require". Good enough for informal discussions, but not
+good enough for mathematics.</p>
+  </div>
+      </div>
+    </div>
+  
+    <div class="col-footer-container">
+      <footer class="col-footer">
+        <ul>
+          <li>
+            <address><a href="/contact">contact</a></address>
+          </li>
+          <li>
+            <a rel="license" href="/license">license</a>
+          </li>
+          <li>
+          <address>
+          powered by <a href="https://getpelican.com/">Pelican</a>
+          </address>
+          </li>
+        </ul>
+      </footer>
+    </div>
+
+</div>
+
+</body>
+
+
+</html>

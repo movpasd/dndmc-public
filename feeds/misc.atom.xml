@@ -1,5 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Do Not Disturb My Circles - misc</title><link href="https://donotdisturbmycircles.com/" rel="alternate"></link><link href="https://donotdisturbmycircles.com/feeds/misc.atom.xml" rel="self"></link><id>https://donotdisturbmycircles.com/</id><updated>2022-08-16T00:00:00+01:00</updated><entry><title>Inheritance is goto for polymorphism</title><link href="https://donotdisturbmycircles.com/inheritance-goto.html" rel="alternate"></link><published>2022-08-16T00:00:00+01:00</published><updated>2022-08-16T00:00:00+01:00</updated><author><name>Movpasd</name></author><id>tag:donotdisturbmycircles.com,2022-08-16:/inheritance-goto.html</id><summary type="html"></summary><content type="html">&lt;p&gt;Everyone likes to give inheritance a hard time these days. Compose, don't
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Do Not Disturb My Circles - misc</title><link href="https://donotdisturbmycircles.com/" rel="alternate"></link><link href="https://donotdisturbmycircles.com/feeds/misc.atom.xml" rel="self"></link><id>https://donotdisturbmycircles.com/</id><updated>2022-12-03T00:00:00+00:00</updated><entry><title>"Positional chess" is a weird concept</title><link href="https://donotdisturbmycircles.com/chess-probability.html" rel="alternate"></link><published>2022-12-03T00:00:00+00:00</published><updated>2022-12-03T00:00:00+00:00</updated><author><name>Movpasd</name></author><id>tag:donotdisturbmycircles.com,2022-12-03:/chess-probability.html</id><summary type="html"></summary><content type="html">&lt;p&gt;There are two methods of thinking when playing chess (or any abstract strategy
+game) -- &lt;em&gt;calculational&lt;/em&gt; or &lt;em&gt;tactical&lt;/em&gt; thinking, and &lt;em&gt;heuristic&lt;/em&gt; or &lt;em&gt;strategic&lt;/em&gt;
+thinking. In chess we might also call the latter &lt;em&gt;positional&lt;/em&gt; thinking.&lt;/p&gt;
+&lt;p&gt;This is somewhat strange. After all, chess is a combinatorial game of perfect
+information. If you lose, it is not because you rolled a dice imperfectly, nor
+because you had to guess what an opponent would play and by misfortune guessed
+poorly -- it is because you played a bad move. Therefore, it is strange
+(at least to me) that heuristics should be involved at all.&lt;/p&gt;
+&lt;p&gt;Here's it put another way. When you play chess, you constantly make decisions
+based on &lt;em&gt;probability&lt;/em&gt;. When you decide to put a knight on a central square,
+it's not because you know that 21 moves down the line you're going to be able
+to threaten a fork. You put that knight there because you know that from a
+central square, you're &lt;em&gt;more likely&lt;/em&gt; to be able to get it involved in a tactic
+down the line.&lt;/p&gt;
+&lt;p&gt;We are forced to make probabilistic decisions because the search space is far
+too large due to the combinatorial nature of the game, despite there being
+absolutely no probability whatsoever in the game itself. From the moment you
+set up the pieces on the board, the game is one single extended tactical
+combination, one long forced win or draw; and the only reason it is ever not
+that is because at some point a player makes a mistake.&lt;/p&gt;
+&lt;p&gt;You might think chess engines are different, but in fact they're not! Sure,
+chess engines are able to calculate much, much deeper than humans, and that is
+the main reason why they absolutely dominate human players; however, they
+cannot calculate all the way down to checkmate from a complicated position
+(and likely will never be able to barring massive improvements in computer
+technology or the development of novel algorithms for reducing the search
+space).&lt;/p&gt;
+&lt;p&gt;Instead they look a couple of dozen moves deep (at most), and then &lt;em&gt;evaluate the
+resulting position&lt;/em&gt;. And that evaluation function must be supplied by
+a &lt;em&gt;human&lt;/em&gt;, based on centuries of &lt;em&gt;human&lt;/em&gt; chess position evaluation heuristics.
+I mean, sure, a lot of it is common sense ("more pieces = more win"). But
+because of this, chess engines often overlook fortresses and other clearly
+drawn situations, insisting they might be able to squeeze out a win due to
+superior material. In this sense, chess engines also have no choice but to
+rely on probabilistic reasoning.&lt;/p&gt;
+&lt;p&gt;I'm not sure how exactly to make rigorous, mathematical sense of this paradox.
+How can a game without any probability require probabilistic reasoning? I'm
+sure some mathematician specialising in game theory will have done research on
+this. But I'll throw out an idea of how you might approach it.&lt;/p&gt;
+&lt;p&gt;The idea is to borrow a page out of statistical mechanics and the notion of
+microstate vs macrostate. You would divide the space of possible chess
+positions (microstates) into parts (macrostates) according to various
+properties of the position (such as material, piece activity, number of passed
+pawns, and such). You would then argue that within each of these classes, a
+certain fraction of the positions are won for White, a certain fraction are won
+for Black, and a certain fraction are drawn. Evaluation of a position then
+comes down to identifying the properties of the position and arguing that
+because the position has this or that set of properties, it is more or
+less &lt;em&gt;likely&lt;/em&gt; that White or Black is winning or that the game is drawn.&lt;/p&gt;
+&lt;p&gt;The issue with this is that it just pushes the problem down one step. How do you
+figure out those fractions without just calculating every position? What our
+human brains do is they look back on all the games that we have played as well
+as all the theory we have studied, and assign approximate probabilities to
+these different macrostates. You could do the same thing: look at a database of
+all games, look at every position that arises in those games, classify them
+according to the properties you're studying, and derive win/draw percentages
+from that.&lt;/p&gt;
+&lt;p&gt;The issue with &lt;em&gt;that&lt;/em&gt; is that it effectively introduces a notion of "metagame".
+It's conceivable that human play may get stuck in a metastable equilibrium, and
+so that your win/draw proportions are not actually objective but depend on the
+particularities of the metagame. Consider this as an illustration: if you fed
+this model games exclusively from the 19th century, versus games exclusively
+from the 21st, the former is likely to put much less stock on material and much
+more on piece activity; this is not because the game has actually changed
+since, but because of the &lt;em&gt;style of play&lt;/em&gt; that was prevalent at the time
+(i.e.: the metagame).&lt;/p&gt;
+&lt;p&gt;This "macrostate" idea is arguably quite close to the way actual humans evaluate
+chess positions. We make &lt;em&gt;arguments&lt;/em&gt; as to why White or Black is winning in
+this or that position, and the support those arguments we point to &lt;em&gt;reasons&lt;/em&gt;.
+Such reasons (such as "Black's king is exposed" or "White has a great outpost
+on f6") are the macrostates.&lt;/p&gt;
+&lt;p&gt;One last elaboration. Instead of considering only the ultimate evaluation of the
+game based on a property of the current position, you could approach this
+more "dynamically" by considering the probabilities of transitioning to other
+positions with different properties. For example, a material imbalance of
+20 to 21 is quite likely to eventually transition to one of 3 to 4, while it's
+much less likely to end up at 19 to 12.&lt;/p&gt;</content><category term="misc"></category><category term="chess"></category><category term="games"></category><category term="maths"></category></entry><entry><title>Inheritance is goto for polymorphism</title><link href="https://donotdisturbmycircles.com/inheritance-goto.html" rel="alternate"></link><published>2022-08-16T00:00:00+01:00</published><updated>2022-08-16T00:00:00+01:00</updated><author><name>Movpasd</name></author><id>tag:donotdisturbmycircles.com,2022-08-16:/inheritance-goto.html</id><summary type="html"></summary><content type="html">&lt;p&gt;Everyone likes to give inheritance a hard time these days. Compose, don't
 inherit, so they say. Well, time for me to jump onto the bandwagon. Here is
 reason #6701 why inheritance is a problem.&lt;/p&gt;
 &lt;p&gt;Inheritance in traditional OOP introduces implicit single-dispatch polymorphism
