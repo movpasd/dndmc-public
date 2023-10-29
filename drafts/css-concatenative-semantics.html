@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+  
+
+    
+  <!-- Site-specific -->
+  <title>dndmc - CSS as a concatenative programming language</title>
+  <meta charset="utf-8" />
+  <meta name="generator" content="Pelican" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" href="https://donotdisturbmycircles.com/theme/css/reset.css" />
+  <link rel="stylesheet" href="https://donotdisturbmycircles.com/theme/css/style.css" />
+  <link id="dark-mode-stylesheet-link" disabled rel="stylesheet" href="https://donotdisturbmycircles.com/theme/css/darkmode.css" />
+  <link rel="icon" href="https://donotdisturbmycircles.com/theme/circle.png" />
+  <script src="https://donotdisturbmycircles.com/theme/js/scripts.js"></script>
+
+  <!-- Thanks Google Fonts! -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,400;0,700;1,400;1,700&family=Roboto+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Roboto+Slab:wght@400;700&family=Roboto:ital,wght@0,400;0,700;0,900;1,400;1,700&display=swap" rel="stylesheet">
+
+
+
+
+
+    <meta name="tags" content="code" />
+    <meta name="tags" content="short" />
+
+</head>
+
+
+<body id="index" class="home">
+
+<div class="site-column">
+
+    <div class="col-header-container">
+      <header class="col-header">
+        <div id="site-title">
+        <a href="https://donotdisturbmycircles.com/">
+          Do Not Disturb My Circles<span class="site-title-suffix">.|</span>
+        </a>
+        </div>
+        <nav id="navbar">
+        <ul>
+            <a href="/"><li>Home</li></a>
+            <a href="/tags.html"><li>Tags</li></a>
+            <a href="/all-posts.html"><li>All posts</li></a>
+            <a href="/about.html"><li>About</li></a>
+        </ul>
+      </nav>
+      </header>
+    </div>
+  
+    <div class="col-content-container">
+      <div class="col-content">
+  <h1 class="post-title">
+  <a href="https://donotdisturbmycircles.com/drafts/css-concatenative-semantics.html" rel="bookmark"
+    title="Permalink to CSS as a concatenative programming language">
+    CSS as a concatenative programming language
+  </a>
+  </h1>
+  
+
+  <footer class="post-info">
+  <table class="post-info-table">
+      <tr>
+        <th>published</th>
+        <td>
+          <time class="published" datetime="9999-12-31T23:59:59.999999-00:01">
+          </time>
+        </td>
+      </tr>
+      <tr>
+          <th>tags</th>
+          <td>
+            <nav class="post-info-tags-container" aria-label="Tags">
+                <a class="tag-name" href="https://donotdisturbmycircles.com/tags/code.html">code</a>
+                <a class="tag-name" href="https://donotdisturbmycircles.com/tags/short.html">short</a>
+            </nav>
+          </td>
+      </tr>
+  </table>
+  </footer>
+
+  <div class="post-content">
+    <p>A <em><a href="https://en.wikipedia.org/wiki/Concatenative_programming_language">concatenative programming language</a></em> is a programming language where the inputs and outputs of functions are not explicitly specified, and instead a program is defined by chaining them together. Concatenative-like syntax is common, like in fluent object-oriented interfaces or Unix pipes, as it's a quite natural way of thinking about computation: I have a value, and I want to pass it through a sequence of elements in order.</p>
+<p>I would argue this forms a natural model for representing the semantics of CSS selectors. But hang on -- aren't CSS selectors notoriously left-associative? I say notorious because this makes it <a href="https://stackoverflow.com/questions/29757133/css-selector-for-adjacency">difficult to construct certain rules</a>. If CSS selectors don't combine in a fully associative way, then they can't be understood as function composition.</p>
+<p>It seems to me this problem only arises because of the rather natural tendency to interpret CSS combinators like <code></code>, <code>&gt;</code>, <code>+</code>, and such as being binary operators. And indeed, you can interpret the syntax in that way, and with the rules about left associativity you get a fully self-consistent semantics.</p>
+<p>But I think it's actually more natural to understand these operators as <em>combining with the selector on their right</em> to form a single unit. So instead of parsing a selector like <code>div &gt; p + .x</code> as being <code>(div &gt; p) + .x</code> and then asking why it can't parse as <code>div &gt; (p + .x)</code>, you understand it as <code>(div) (&gt; p) (+ .x)</code>. If you do this, each sectioned unit can be understood as one independent function from the power set of DOM nodes to itself.</p>
+<p>You can understand this as being a form of unary operator, but I don't think this is the best way of thinking about it, as otherwise you'd need to add a restriction at the level of abstract syntax on why you can't apply it to a non-simple-sequence selector (<code>&gt; (p + .x)</code>).</p>
+<p>So, if <code>div</code>, <code>&gt; p</code>, and <code>+ .x</code> are functions, what do they operate on? They operate on <em>sets of DOM nodes</em>. These DOM nodes are not unbound from their originating DOM document; if you like, they are by-reference, not by-value. This must be specified, because otherwise combination of CSS selectors could result in duplication of nodes, which is out-of-spec. The initial value is the set of all DOM nodes.</p>
+<p>This scheme offers something like a denotational semantics of what the CSS spec calls "complex selectors". It can be extended to lists of complex selectors, but in that case we leave the strict concatenative paradigm and enter the more general "function-level" paradigm, where the comma serves as something like a functional form.</p>
+  </div>
+      </div>
+    </div>
+  
+    <div class="col-footer-container">
+      <footer class="col-footer">
+        <ul>
+          <li>
+            <address><a href="/contact">contact</a></address>
+          </li>
+          <li>
+            <a rel="license" href="/license">license</a>
+          </li>
+          <li>
+          <address>
+          powered by <a href="https://getpelican.com/">Pelican</a>
+          </address>
+          </li>
+        </ul>
+      </footer>
+    </div>
+
+</div>
+
+</body>
+
+
+</html>

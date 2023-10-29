@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="english">
+<html lang="en">
 
 
 <head>
@@ -29,6 +29,7 @@
 
   <link rel="stylesheet" href="https://donotdisturbmycircles.com/theme/css/reset.css" />
   <link rel="stylesheet" href="https://donotdisturbmycircles.com/theme/css/style.css" />
+  <link id="dark-mode-stylesheet-link" disabled rel="stylesheet" href="https://donotdisturbmycircles.com/theme/css/darkmode.css" />
   <link rel="icon" href="https://donotdisturbmycircles.com/theme/circle.png" />
   <script src="https://donotdisturbmycircles.com/theme/js/scripts.js"></script>
 
@@ -139,14 +140,13 @@ then $b$ can be modified to take or not take $a$ as a dependency without
 modifying $a$, but $a$ can't be modified without requiring $b$ to change.
 <em>Breaking changes flow one way</em>, and that way is downstream. This causal
 structure is what causes dependency hell.</p>
-<p>We might also consider code which is thematically connected to be more proximal
-and thus more logically grouped together into modules, though I would
-<a href="{filename}/thematic-modules-harmful.md">advise against that</a>, personally. This
-can be modelled by adding an extra weighted edge between code elements which
-have a thematic connection. Besides thematic, there might be other types
-of <em>conceptual connections</em> between elements, like semantic coupling
-(where coupling arises due to the use of similar language), which reinforce
-their proximity even if they are not strictly speaking dependent.</p>
+<p>We might also consider code which is thematically connected to be more proximal and thus
+more logically grouped together into modules, though I would advise against that,
+personally. This can be modelled by adding an extra weighted edge between code elements
+which have a thematic connection. Besides thematic, there might be other types of
+<em>conceptual connections</em> between elements, like semantic coupling (where coupling arises
+due to the use of similar language), which reinforce their proximity even if they are
+not strictly speaking dependent.</p>
 <p>For example, </p>
 <h3>Self-dependency</h3>
 <h3>Module patterns</h3>

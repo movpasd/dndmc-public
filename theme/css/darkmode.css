@@ -1,0 +1,61 @@
+:root {
+
+    /* COLOR VARIABLES */
+
+    --bg: black;
+    --debug-0: hsla(0, 0%, 50%, 0.2);
+    --debug-1: hsla(300, 100%, 50%, 0.2);
+    --debug-2: hsla(180, 100%, 50%, 0.2);
+    --debug-3: hsla(60, 100%, 50%, 0.2);
+
+    /* Layout */
+    --ly-seps:
+        /* separators */
+        hsl(0, 0%, 40%);
+    --ly-hover:
+        /* hover */
+        hsl(0, 0%, 5%);
+
+    /* Text */
+    --tx: hsl(0, 0%, 70%);
+    --tx-inv:
+        /* inverted */
+        black;
+    --tx-faint: hsl(0, 0%, 50%);
+    --tx-very-faint: hsl(0, 0%, 25%);
+    /* (highlights) */
+    --tx-hl-pop: hsl(0, 100%, 50%);
+    --tx-hl-dull: hsl(0, 50%, 50%);
+    --tx-hl-pastel: hsl(0, 70%, 30%);
+    --tx-hl-dark: darkred;
+    /* (contrasts) */
+    --tx-con-pop: hsl(180, 100%, 50%);
+    --tx-con-dull: hsl(180, 50%, 50%);
+    --tx-con-pastel: hsl(180, 50%, 30%);
+    --tx-con-dark: hsl(180, 50%, 70%);
+    --tx-hl-con-transition: hsl(90, 50%, 15%);
+
+    /* Fonts */
+    --font-default: "Roboto", "Helvetica", sans;
+    --font-condensed: "Roboto Condensed", "Helvetica", sans;
+    --font-mono: "Roboto Mono", "Consolas", mono;
+
+    /* Backgrounds */
+    --bg-faint: hsl(0, 0%, 5%);
+
+
+    /* LAYOUT LOGIC VARIABLES */
+
+    --ly-ends-hpad: 1rem;
+    /* header/footer hpads */
+    --ly-content-hpad: 4rem;
+    --column-max-width: 42rem;
+    --column-min-width: 400px;
+
+    /* Narrow screen breakpoint: <640px */
+
+    /* Text layout */
+    --read-linespace: 1.6;
+    --read-def-postspace: 1.3rem;
+
+}
