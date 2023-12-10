@@ -42,7 +42,7 @@
     /* Fonts */
     --font-default: "Roboto", "Helvetica", sans;
     --font-condensed: "Roboto Condensed", "Helvetica", sans;
-    --font-mono: "Roboto Mono", "Consolas", mono;
+    --font-mono: "Roboto Mono", "Consolas", monospace;
 
     /* Backgrounds */
     --bg-faint: hsl(0, 0%, 95%);
