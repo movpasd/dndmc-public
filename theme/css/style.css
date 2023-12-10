@@ -60,6 +60,7 @@
 
     /* Text layout */
     --read-linespace: 1.6;
+    --read-code-linespace: 1.33;
     --read-def-postspace: 1.3rem;
 
 }
@@ -101,6 +102,11 @@ code {
     font-family: var(--font-mono);
     background-color: var(--bg-faint);
     font-size: 0.9rem;
+}
+
+pre code {
+    background-color: initial;
+
 }
 
 /* Main column */
@@ -173,7 +179,7 @@ code {
 #navbar {
     /* Layout */
     width: 100%;
-    height: 2.5rem;
+    height: 3.5rem;
     padding-top: 1rem;
 
     /* Style */
@@ -282,10 +288,8 @@ code {
 
     /* Layout */
     width:
-    min(
-        calc(var(--column-max-width) - 2 * var(--ly-content-hpad)),
-        90%
-    );
+        min(calc(var(--column-max-width) - 2 * var(--ly-content-hpad)),
+            90%);
 
     /* Text */
 
@@ -359,16 +363,31 @@ code {
     margin-bottom: calc(var(--read-def-postspace) * 1.5);
 }
 
-.col-content .post-content h4, .col-content .post-content h5  {
+.col-content .post-content h4,
+.col-content .post-content h5 {
     margin-top: calc(var(--read-def-postspace) * 1.5);
     margin-bottom: calc(var(--read-def-postspace) * 1);
 }
 
-.col-content .post-content p, .col-content .post-content ul, .col-content .post-content ol {
+.col-content .post-content p,
+.col-content .post-content ul,
+.col-content .post-content ol,
+.col-content .post-content pre {
     /* Layout */
     width: 100%;
     line-height: var(--read-linespace);
     margin-bottom: var(--read-def-postspace);
+}
+
+.col-content .post-content pre {
+    /* Layout */
+    line-height: var(--read-code-linespace);
+    padding: 1.2rem;
+    overflow-x: scroll;
+    /* Style */
+    background-color: var(--bg-faint);
+    border-radius: 0.5rem;
+
 }
 
 .col-content .post-content ul {
@@ -411,7 +430,7 @@ code {
     margin: 0.5rem auto;
 }
 
-.post-content img + em {
+.post-content img+em {
     display: block;
     text-align: center;
     font-size: smaller;
@@ -441,7 +460,7 @@ code {
     text-align: center;
     padding: 1.3rem 0;
     margin-bottom: 4rem;
-    
+
     /* Debug */
     /* background-color: var(--debug-1); */
 }
@@ -490,7 +509,8 @@ code {
 
 /* Page styling */
 
-.page-container h1, .specialpage-container h1 {
+.page-container h1,
+.specialpage-container h1 {
     margin-bottom: 1rem;
     font-size: 1.8rem;
 }
@@ -513,7 +533,8 @@ h1 .tag-name {
 
 /* Stuff I can use from Markdown */
 
-.post-container .mono, .page-container .mono {
+.post-container .mono,
+.page-container .mono {
     font-family: var(--font-mono);
 }
 
