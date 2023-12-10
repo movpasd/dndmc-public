@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+  
+
+    
+  <!-- Site-specific -->
+  <title>dndmc - Interface Segregates</title>
+  <meta charset="utf-8" />
+  <meta name="generator" content="Pelican" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" href="https://donotdisturbmycircles.com/theme/css/reset.css" />
+  <link rel="stylesheet" href="https://donotdisturbmycircles.com/theme/css/style.css" />
+  <link id="dark-mode-stylesheet-link" disabled rel="stylesheet" href="https://donotdisturbmycircles.com/theme/css/darkmode.css" />
+  <link rel="icon" href="https://donotdisturbmycircles.com/theme/circle.png" />
+  <script src="https://donotdisturbmycircles.com/theme/js/scripts.js"></script>
+
+  <!-- Thanks Google Fonts! -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,400;0,700;1,400;1,700&family=Roboto+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Roboto+Slab:wght@400;700&family=Roboto:ital,wght@0,400;0,700;0,900;1,400;1,700&display=swap" rel="stylesheet">
+
+
+
+
+
+    <meta name="tags" content="code" />
+
+</head>
+
+
+<body id="index" class="home">
+
+<div class="site-column">
+
+    <div class="col-header-container">
+      <header class="col-header">
+        <div id="site-title">
+        <a href="https://donotdisturbmycircles.com/">
+          Do Not Disturb My Circles<span class="site-title-suffix">.|</span>
+        </a>
+        </div>
+        <nav id="navbar">
+        <ul>
+            <a href="/"><li>Home</li></a>
+            <a href="/tags.html"><li>Tags</li></a>
+            <a href="/all-posts.html"><li>All posts</li></a>
+            <a href="/about.html"><li>About</li></a>
+        </ul>
+      </nav>
+      </header>
+    </div>
+  
+    <div class="col-content-container">
+      <div class="col-content">
+  <h1 class="post-title">
+  <a href="https://donotdisturbmycircles.com/drafts/interface-segregates.html" rel="bookmark"
+    title="Permalink to Interface Segregates">
+    Interface Segregates
+  </a>
+  </h1>
+  
+
+  <footer class="post-info">
+  <table class="post-info-table">
+      <tr>
+        <th>published</th>
+        <td>
+          <time class="published" datetime="2023-12-10T00:00:00+00:00">
+          2023-12-10</time>
+        </td>
+      </tr>
+      <tr>
+          <th>tags</th>
+          <td>
+            <nav class="post-info-tags-container" aria-label="Tags">
+                <a class="tag-name" href="https://donotdisturbmycircles.com/tags/code.html">code</a>
+            </nav>
+          </td>
+      </tr>
+  </table>
+  </footer>
+
+  <div class="post-content">
+    <p><em>A language feature idea to add syntactic sugar and namespacing to make it easier to implement the interface segregation principle, and allow interfaces that depend on other interfaces to better specify their intention.</em></p>
+<p>An interface segregate is a specific portion of an interface that has been separated out from the rest of the interface. The segregate forms a supertype of the enclosing interface, and is namespaced to it.</p>
+<p>Though I use the term "interface" here, I mean any similar language feature that allows you to specify types to enable runtime or comptime polymorphism. Structural protocols or generic-based traits would be alternative examples.</p>
+<p>For example, a <code>Buffer</code> interface could have <code>Buffer::ForRead</code> and <code>Buffer::ForWrite</code> segregate. If any methods for the <code>Buffer</code> require both reading and writing, then those can be specified in the top-level <code>Buffer</code>. That way, procedures which take a <code>Buffer</code> exclusively for reading can specify the more general supertype <code>Buffer::ForRead</code>, guaranteeing at the type level that they will not read the buffer. In pseudo-code:</p>
+<div class="highlight"><pre><span></span><code><span class="n">interface</span><span class="w"> </span><span class="n">Buffer</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">segregate</span><span class="w"> </span><span class="n">interface</span><span class="w"> </span><span class="n">ForRead</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">function</span><span class="w"> </span><span class="n">read</span><span class="p">(</span><span class="nl">n:</span><span class="w"> </span><span class="n">usize</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">bytes</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="k">function</span><span class="w"> </span><span class="n">peek</span><span class="p">(</span><span class="nl">n:</span><span class="w"> </span><span class="n">usize</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">bytes</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="k">function</span><span class="w"> </span><span class="n">seek</span><span class="p">(</span><span class="nl">n:</span><span class="w"> </span><span class="n">usize</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">bytes</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="n">segregate</span><span class="w"> </span><span class="n">interface</span><span class="w"> </span><span class="n">ForWrite</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">function</span><span class="w"> </span><span class="n">write</span><span class="p">(</span><span class="nl">data:</span><span class="w"> </span><span class="n">bytes</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="k">function</span><span class="w"> </span><span class="n">append</span><span class="p">(</span><span class="nl">data:</span><span class="w"> </span><span class="n">bytes</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="n">find_replace</span><span class="p">(</span><span class="nl">find:</span><span class="w"> </span><span class="n">bytes</span><span class="p">,</span><span class="w"> </span><span class="nl">replace:</span><span class="w"> </span><span class="n">bytes</span><span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">collection</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">usizes</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+
+<p>This is already possible in most languages by splitting the <code>Buffer</code> interface into <code>ReadableBuffer</code> and <code>WritableBuffer</code> interfaces, and then declaring <code>Buffer extends ReadableBuffer, WritableBuffer</code> (or whatever subtyping syntax your favourite language uses). The equivalent pseudo-code:</p>
+<div class="highlight"><pre><span></span><code><span class="n">interface</span><span class="w"> </span><span class="n">ReadableBuffer</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">function</span><span class="w"> </span><span class="n">read</span><span class="p">(</span><span class="n">n</span><span class="p">:</span><span class="w"> </span><span class="n">usize</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">bytes</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">function</span><span class="w"> </span><span class="n">peek</span><span class="p">(</span><span class="n">n</span><span class="p">:</span><span class="w"> </span><span class="n">usize</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">bytes</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">function</span><span class="w"> </span><span class="n">seek</span><span class="p">(</span><span class="n">n</span><span class="p">:</span><span class="w"> </span><span class="n">usize</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">bytes</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+<span class="n">interface</span><span class="w"> </span><span class="n">WritableBuffer</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">function</span><span class="w"> </span><span class="n">write</span><span class="p">(</span><span class="n">data</span><span class="p">:</span><span class="w"> </span><span class="n">bytes</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">function</span><span class="w"> </span><span class="n">append</span><span class="p">(</span><span class="n">data</span><span class="p">:</span><span class="w"> </span><span class="n">bytes</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+<span class="n">interface</span><span class="w"> </span><span class="n">Buffer</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="n">ReadableBuffer</span><span class="p">,</span><span class="w"> </span><span class="n">WritableBuffer</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">function</span><span class="w"> </span><span class="n">find_replace</span><span class="p">(</span><span class="n">find</span><span class="p">:</span><span class="w"> </span><span class="n">bytes</span><span class="p">,</span><span class="w"> </span><span class="n">replace</span><span class="p">:</span><span class="w"> </span><span class="n">bytes</span><span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">collection</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">usizes</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+
+<p>This is an application of the "interface segregation principle". It's considered a good practice because it means that polymorphic functions using the interfaces can ensure dependency on only those features that they strictly require, and this also means clients of those functions can get guarantees as to what operations with what side-effects the implementation can use, enhancing safety.</p>
+<p>However, the proliferation of such top-level granular interfaces like this can obscure their purpose. When writing a polymorphic function, I would argue that it is clearer to specify "this function takes a buffer, but it will only write to it".</p>
+<p>I'd also argue that the code is less conceptually clear and more "boilerplatey", not correctly reflecting the intention of the interface developer. It takes an extra layer of design thought to think to separate the interface into parts, and the code reads as the rather stilted and unnatural "a buffer is a buffer that can be read from and written to".</p>
+<p>Adding interface segregates as syntactic sugar allows the code to more naturally reflect the intention of the developer: a buffer has multiple aspects, and I'm separating them so that a client of the interface can specify dependency on only one aspect of it.</p>
+<p>Now, the example I've given is standard enough that the existing way of structuring the code is not too unclear. But where an interface is especially large and complex, having a dozen top-level interfaces, in my opinion, can really hurt readability.</p>
+<p>Consider a repository pattern, for instance. Suppose you had some domain service which needed access to two repositories, one for reading, and one for reading and writing. Suppose also that the client of this service really needs the service to avoid writing to the read-only repository. You could certainly document this fact, but what if requirements change?</p>
+<p>There is a popular expression: "make illegal states unrepresentable". This is analogous: "make illegal behaviours impossible". Much better would be to segregate the repository interface into read-only and writable parts, have the service take the read-only part only as a parameter, and have the client code cast the repository to the read-only interface. If requirements change and the service suddenly needs to write to the read-only repository, you'll have to change its function signature, and the compiler will raise an error at the call site.</p>
+<p>But in practice, separating out this interface into top-level parts fragments the codebase. Does a <code>ReadableCustomerRepository</code> really need to be a top-level interface? Is anyone likely to actually implement just that interface (except perhaps for mocking)? A top-level interface suggests to the reader a degree of conceptual independence that is lacking here.</p>
+<p>One last thing. A language could also introduce "anonymous segregates". Each interface declaration would implicitly add a net of new supertypes of the interface based on the power set of the methods specified. For instance,</p>
+<div class="highlight"><pre><span></span><code>interface MyInterface {
+    foo();
+    bar();
+    baz();
+}
+</code></pre></div>
+
+<p>would introduce (with a hypothetical syntax) supertypes of <code>MyInterface</code> such as <code>MyInterface:&gt;{foo}</code>, <code>MyInterface:&gt;{bar, baz}</code>, etc.</p>
+<p>This way, dependent interfaces could declare their intent to use only a certain number of methods within <code>MyInterface</code>, e.g.: <code>myFunction(x: MyInterface:&gt;{foo})</code> would promise to only use <code>foo</code>. A cast could be used to indicate that an object ought only be used for a restricted set of operations; <code>readonlyFile := cast[File:&gt;{read, peek}](myFile)</code>. I'm not so convinced at the utility of such a construct but thought I would put it out there anyway.</p>
+  </div>
+      </div>
+    </div>
+  
+    <div class="col-footer-container">
+      <footer class="col-footer">
+        <ul>
+          <li>
+            <address><a href="/contact">contact</a></address>
+          </li>
+          <li>
+            <a rel="license" href="/license">license</a>
+          </li>
+          <li>
+          <address>
+          powered by <a href="https://getpelican.com/">Pelican</a>
+          </address>
+          </li>
+        </ul>
+      </footer>
+    </div>
+
+</div>
+
+</body>
+
+
+</html>
